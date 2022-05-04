@@ -83,7 +83,7 @@ function toLeft() {
   tint(255, 255, 255, 75);
   image(back, backX1, 0, backWidth, backHeight);
   image(back, backX1 + backWidth, 0, backWidth, backHeight);
-  backX1 -=0.1;
+  backX1 -=0.2;
   
   if (backX1 < -backWidth) {
     backX1 = 0;  
@@ -94,7 +94,7 @@ function toRight() {
   tint(255, 255, 255, 90);
   image(back, backX2, 0, backWidth, backHeight);
   image(back, backX2 - backWidth, 0, backWidth, backHeight);
-  backX2 +=0.1;
+  backX2 +=0.2;
   
   if (backX2 > backWidth) {
     backX2 = 0;  
