@@ -31,7 +31,7 @@ let inter;
 function preload() {
   ruggito = new Tone.Player(baseURLSound + "ruggito.mp3").toDestination();
   logo = loadImage(baseURLImage + 'good one white.png');
-  back = loadImage(baseURLBack + '08.png');
+  back = loadImage(baseURLBack + '12.png');
   //back2 = loadImage(baseURLBack + '12.png');
 }
 function windowResized() {
