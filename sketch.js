@@ -31,8 +31,8 @@ let inter;
 function preload() {
   ruggito = new Tone.Player(baseURLSound + "ruggito.mp3").toDestination();
   logo = loadImage(baseURLImage + 'good one white.png');
-  back = loadImage(baseURLBack + '12.png');
-  back2 = loadImage(baseURLBack + '12.png');
+  back = loadImage(baseURLBack + '08.png');
+  //back2 = loadImage(baseURLBack + '12.png');
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
@@ -79,8 +79,8 @@ function toLeft() {
 
 function toRight() {
   tint(255, 255, 255, 75);
-  image(back2, backX2, 0, backWidth, backHeight);
-  image(back2, backX2 - backWidth, 0, backWidth, backHeight);
+  image(back, backX2, 0, backWidth, backHeight);
+  image(back, backX2 - backWidth, 0, backWidth, backHeight);
   
   backX2 +=1;
   if (backX2 > backWidth) {
