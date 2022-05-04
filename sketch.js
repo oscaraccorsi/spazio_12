@@ -26,7 +26,7 @@ let backX2 = 0;
 
 let from, to;
 let amount;
-let index = 0.01;
+let index = 0.005;
 let inter;
 //-----------------------------------------------PRELOAD
 function preload() {
