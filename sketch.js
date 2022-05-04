@@ -1,4 +1,3 @@
-
 let baseURLSound = 'https://oscaraccorsi.github.io/mp3_files/';
 
 const vol = new Tone.Volume(0).toDestination();
@@ -9,6 +8,10 @@ let baseURLBack = 'https://oscaraccorsi.github.io/backgrounds/';
 let baseURLImage = 'https://oscaraccorsi.github.io/pictures/';
 let logo;
 let xLogo;
+let img;
+palette = [];
+
+
 
 let back;
 let backWidth;
@@ -23,25 +26,38 @@ let backX2 = 0;
 
 let from, to;
 let amount;
-let index = 0.002;
+let index = 0.01;
 let inter;
-
-
-
+//-----------------------------------------------PRELOAD
 function preload() {
   ruggito = new Tone.Player(baseURLSound + "ruggito.mp3").toDestination();
   logo = loadImage(baseURLImage + 'good one white.png');
   back = loadImage(baseURLBack + '12.png');
+  img = loadImage(baseURLImage + 'schneider10.png');
   //back2 = loadImage(baseURLBack + '12.png');
 }
+//------------------------------------------------WINDOWRESEZED
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+//--------------------------------------------------SETUP
 function setup() {
   ruggito.loop = true;
   ruggito.autostart = true;
   
   createCanvas(windowWidth, windowHeight);
+  
+  img.resize(100, 200);
+  img.loadPixels();
+  
+//-------------------------------------------------palette  
+  for (let i=0; i < img.pixels.length; i += 4) {
+    let r = img.pixels[i]; 
+    let g = img.pixels[i+1]; 
+    let b = img.pixels[i+2]; 
+    let c = color(r, g, b, 150);
+    palette.push(c);    
+  }
   
   xLogo = windowWidth-25;
   
@@ -51,43 +67,40 @@ function setup() {
   back2Width = windowWidth;
   
 //-----------------------------------------lerp  
-  from = color(0, 0, 255);
-  to = color(255, 0, 0);
+  from = random(palette);
+  to = random(palette);
   amount = 0;
   inter = lerpColor(from, to, amount);  
 }
-
+//------------------------------------------DRAW
 function draw() {
   colorFade();
   toRight();
-  toLeft();
-  
-  
-  
+  toLeft();  
 }
-
+//----------------------------------toLeft
 function toLeft() {
   tint(255, 255, 255, 75);
   image(back, backX1, 0, backWidth, backHeight);
   image(back, backX1 + backWidth, 0, backWidth, backHeight);
+  backX1 -=0.1;
   
-  backX1 -=1;
   if (backX1 < -backWidth) {
     backX1 = 0;  
   }
 }
-
+//-----------------------------------toRight
 function toRight() {
-  tint(255, 255, 255, 75);
+  tint(255, 255, 255, 90);
   image(back, backX2, 0, backWidth, backHeight);
   image(back, backX2 - backWidth, 0, backWidth, backHeight);
+  backX2 +=0.1;
   
-  backX2 +=1;
   if (backX2 > backWidth) {
     backX2 = 0;  
   }
 }
-
+//----------------------------------------colorFade
 function colorFade() {
   inter = lerpColor(from, to, amount);
   background(inter);
@@ -95,7 +108,13 @@ function colorFade() {
   
   if (amount >= 1 || amount <= 0) {
   index = -index;
-  }  
+  } 
+  if (amount >= 1-index) {
+    from = random(palette);
+  }
+  if (amount <=  0 +index) {
+     to = random(palette);
+  }
 }
 
 //----------------------------------------mousePressed
